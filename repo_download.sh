@@ -22,9 +22,10 @@ git checkout v1.24.0
 git submodule update --init
 
 cd $workspace/vcaa_agent/third_party/grpc/third_party/protobuf
-git checkout v3.9.2
-git pull origin v3.9.2
+git checkout v3.8.0
+git pull origin v3.8.0
 
-rm -rf  $workspace/vcaa_agent/third_party/grpc/third_party/upb/.gitmodules
+#rm -rf $workspace/vcaa_agent/third_party/grpc/third_party/upb/.gitmodules
 
-sed -i 's/'$username'/sys_mediaci/g' .gitmodules
+cd $workspace
+sed -i "s/$username/sys_mediaci/g" .gitmodules
