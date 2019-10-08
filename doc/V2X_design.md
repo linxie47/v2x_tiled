@@ -43,13 +43,13 @@ AnalyticsConfigParameter {
 
 AnalyticsServiceResponse {
 
-​	`int service_id`	
+​	`int service_id`
 
 }
 
 AnalyticsResult {
 
-​	`// detections` 
+​	`// detections`
 
 ​	`Detection detections`
 
@@ -61,7 +61,7 @@ AnalyticsResult {
 
 InferenceResponse {
 
-​	`AnalyticsResult infer_result` 
+​	`AnalyticsResult infer_result`
 
 }
 

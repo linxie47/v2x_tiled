@@ -131,7 +131,7 @@ if(ENABLE_AGENT)
 	  -DgRPC_DIR:PATH=${INSTALL_DIR}/grpc/lib/cmake/grpc
 	  -Dgflags_DIR:PATH=${INSTALL_DIR}/gflags/lib/cmake/gflags
 	  -Dglog_DIR:PATH=${INSTALL_DIR}/glog/lib/cmake/glog
-    DEPENDS protobuf grpc gflags glog cppnetlib
+    DEPENDS protobuf grpc gflags glog
   )
 endif()
 
@@ -165,72 +165,6 @@ if(ENABLE_AGENT_TEST)
     PREFIX agent
     SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/test/integration"
     BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/test/integration"
-    INSTALL_COMMAND ""
-    CMAKE_CACHE_ARGS
-        -DProtobuf_DIR:PATH=${_FINDPACKAGE_PROTOBUF_CONFIG_DIR}
-        -Dc-ares_DIR:PATH=${INSTALL_DIR}/c-ares/lib/cmake/c-ares
-        -DZLIB_ROOT:STRING=${INSTALL_DIR}/zlib
-        ${_CMAKE_ARGS_OPENSSL_ROOT_DIR}
-        -DgRPC_DIR:PATH=${INSTALL_DIR}/grpc/lib/cmake/grpc
-        -Dgflags_DIR:PATH=${INSTALL_DIR}/gflags/lib/cmake/gflags
-        -Dglog_DIR:PATH=${INSTALL_DIR}/glog/lib/cmake/glog
-    DEPENDS protobuf grpc gflags glog
-  )
-endif()
-
-if(ENABLE_EXAMPLES)
-  ExternalProject_Add(image-infer
-    PREFIX examples
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples/image_infer"
-    BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/examples/image_infer"
-    INSTALL_COMMAND ""
-    CMAKE_CACHE_ARGS
-        -DProtobuf_DIR:PATH=${_FINDPACKAGE_PROTOBUF_CONFIG_DIR}
-        -Dc-ares_DIR:PATH=${INSTALL_DIR}/c-ares/lib/cmake/c-ares
-        -DZLIB_ROOT:STRING=${INSTALL_DIR}/zlib
-        ${_CMAKE_ARGS_OPENSSL_ROOT_DIR}
-        -DgRPC_DIR:PATH=${INSTALL_DIR}/grpc/lib/cmake/grpc
-        -Dgflags_DIR:PATH=${INSTALL_DIR}/gflags/lib/cmake/gflags
-        -Dglog_DIR:PATH=${INSTALL_DIR}/glog/lib/cmake/glog
-    DEPENDS protobuf grpc gflags glog
-  )
-
-  ExternalProject_Add(stream-infer
-    PREFIX examples
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples/stream_infer"
-    BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/examples/stream_infer"
-    INSTALL_COMMAND ""
-    CMAKE_CACHE_ARGS
-        -DProtobuf_DIR:PATH=${_FINDPACKAGE_PROTOBUF_CONFIG_DIR}
-        -Dc-ares_DIR:PATH=${INSTALL_DIR}/c-ares/lib/cmake/c-ares
-        -DZLIB_ROOT:STRING=${INSTALL_DIR}/zlib
-        ${_CMAKE_ARGS_OPENSSL_ROOT_DIR}
-        -DgRPC_DIR:PATH=${INSTALL_DIR}/grpc/lib/cmake/grpc
-        -Dgflags_DIR:PATH=${INSTALL_DIR}/gflags/lib/cmake/gflags
-        -Dglog_DIR:PATH=${INSTALL_DIR}/glog/lib/cmake/glog
-    DEPENDS protobuf grpc gflags glog
-  )
-
-  ExternalProject_Add(image-infer-restful
-    PREFIX examples
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples/restful_image_infer"
-    BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/examples/restful_image_infer"
-    INSTALL_COMMAND ""
-    CMAKE_CACHE_ARGS
-        -DProtobuf_DIR:PATH=${_FINDPACKAGE_PROTOBUF_CONFIG_DIR}
-        -Dc-ares_DIR:PATH=${INSTALL_DIR}/c-ares/lib/cmake/c-ares
-        -DZLIB_ROOT:STRING=${INSTALL_DIR}/zlib
-        ${_CMAKE_ARGS_OPENSSL_ROOT_DIR}
-        -DgRPC_DIR:PATH=${INSTALL_DIR}/grpc/lib/cmake/grpc
-        -Dgflags_DIR:PATH=${INSTALL_DIR}/gflags/lib/cmake/gflags
-        -Dglog_DIR:PATH=${INSTALL_DIR}/glog/lib/cmake/glog
-    DEPENDS protobuf grpc gflags glog
-  )
-  
-  ExternalProject_Add(stream-infer-restful
-    PREFIX examples
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/examples/restful_stream_infer"
-    BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/examples/restful_stream_infer"
     INSTALL_COMMAND ""
     CMAKE_CACHE_ARGS
         -DProtobuf_DIR:PATH=${_FINDPACKAGE_PROTOBUF_CONFIG_DIR}
