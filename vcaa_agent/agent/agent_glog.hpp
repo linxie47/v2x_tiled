@@ -23,7 +23,7 @@ class AgentGlogger {
         // FLAGS_log_dir = LOGDIR;
         FLAGS_colorlogtostderr = true;
         FLAGS_stop_logging_if_full_disk = true;
-        // google::SetStderrLogging(google::WARNING);
+        google::SetStderrLogging(google::INFO);
         google::InitGoogleLogging(name);
     }
 

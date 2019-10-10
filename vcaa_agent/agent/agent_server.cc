@@ -14,6 +14,13 @@ Status VCAAServiceImpl::CreateVideoAnalyticsService(ServerContext *context, cons
                                                     vgrpc::VideoAnalyticsResponse *res) {
     VLOG(2) << "CreateVideoAnalyticsService!" << std::endl;
 
+    LOG(INFO) << "load model:" << req->model_name() << std::endl;
+
+    vgrpc::ResStatus* res_status = res->mutable_status();
+    res_status->set_code(vgrpc::ResStatusCode::OK);
+    // success, no message
+    res_status->clear_message();
+
     return Status::OK;
 }
 } // namespace agent
