@@ -48,23 +48,22 @@ bool CheckCommandLine() {
 }
 
 void RunServer() {
-  std::string server_address =
-      FLAGS_gh + std::string(":") + std::to_string(FLAGS_gp);
+    std::string server_address = FLAGS_gh + std::string(":") + std::to_string(FLAGS_gp);
 
-  vcaa::agent::VCAAServiceImpl agentService;
+    vcaa::agent::VCAAServiceImpl agentService;
 
-  ServerBuilder builder;
-  // Listen on the given address without any authentication mechanism.
-  builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
-  // Register "service" as the instance through which we'll communicate with
-  // clients. In this case it corresponds to an *synchronous* service.
-  builder.RegisterService(&agentService);
+    ServerBuilder builder;
+    // Listen on the given address without any authentication mechanism.
+    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+    // Register "service" as the instance through which we'll communicate with
+    // clients. In this case it corresponds to an *synchronous* service.
+    builder.RegisterService(&agentService);
 
-  // Finally assemble the server.
-  std::unique_ptr<Server> server(builder.BuildAndStart());
-  LOG(INFO) << "gRPC Server listening on: " << server_address << std::endl;
+    // Finally assemble the server.
+    std::unique_ptr<Server> server(builder.BuildAndStart());
+    LOG(INFO) << "gRPC Server listening on: " << server_address << std::endl;
 
-  server->Wait();
+    server->Wait();
 }
 
 int main(int argc, char **argv) {

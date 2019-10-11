@@ -24,7 +24,7 @@
 #include "vcaa_agent.grpc.pb.h"
 using namespace vcaa::grpcService;
 
-//gRPC headers
+// gRPC headers
 #include <grpc/grpc.h>
 #include <grpcpp/channel.h>
 #include <grpcpp/client_context.h>
@@ -36,26 +36,23 @@ using namespace vcaa::grpcService;
 #include <string>
 #include <vector>
 
-namespace vcaa
-{
-namespace agent
-{
+namespace vcaa {
+namespace agent {
 
-class VCAAClient final
-{
-public:
-  VCAAClient(std::shared_ptr<grpc::Channel> channel);
-  VCAAClient(VCAAClient &&) = default;
-  VCAAClient(const VCAAClient &) = default;
-  VCAAClient &operator=(VCAAClient &&) = default;
-  VCAAClient &operator=(const VCAAClient &) = default;
-  ~VCAAClient(){};
+class VCAAClient final {
+  public:
+    VCAAClient(std::shared_ptr<grpc::Channel> channel);
+    VCAAClient(VCAAClient &&) = default;
+    VCAAClient(const VCAAClient &) = default;
+    VCAAClient &operator=(VCAAClient &&) = default;
+    VCAAClient &operator=(const VCAAClient &) = default;
+    ~VCAAClient(){};
 
-public:
-  bool CreateVideoAnalyticsService(const std::string &model_name, const AnalyticsConfigParam &param);
+  public:
+    bool CreateVideoAnalyticsService(const std::string &model_name, const AnalyticsConfigParam &param);
 
-private:
-  std::unique_ptr<VCAAService::Stub> stub_;
+  private:
+    std::unique_ptr<VCAAService::Stub> stub_;
 };
 
 } // end of namespace agent

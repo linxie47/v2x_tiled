@@ -86,18 +86,6 @@ set(LINK_LIB pthread dl)
 #message(INFO "TBB LINK libs: " ${TBB_LINK_LIB})
 #set(LINK_LIB ${LINK_LIB} ${TBB_LINK_LIB})
 
-#ffmpeg
-#execute_process(COMMAND pkg-config libavcodec --variable=libdir OUTPUT_VARIABLE FFMPEG_FOLDER)
-#find_library(AVCODEC_LIB avcodec ${FFMPEG_FOLDER} NO_DEFAUT_PATH)
-#find_library(AVUTIL_LIB avutil ${FFMPEG_FOLDER} NO_DEFAUT_PATH)
-#find_library(TBB_LIB tbb ${TBB_LIB_PATH} NO_DEFAUT_PATH)
-#set(FFMPEG_LINK_LIB ${AVCODEC_LIB} ${AVUTIL_LIB} ${TBB_LIB})
-#message(INFO "FFMPEG LINK libs: " ${FFMPEG_LINK_LIB})
-#set(LINK_LIB ${LINK_LIB} ${FFMPEG_LINK_LIB})
-
-#execute_process(COMMAND pkg-config libavcodec --variable=includedir OUTPUT_VARIABLE FFMPEG_HEAD_FOLDER)
-#include_directories(${FFMPEG_HEAD_FOLDER})
-
 #ie depends
 #set(OPENVINO_INC /opt/intel/vcaa/inference-engine)
 #include_directories("${OPENVINO_INC}/include")
@@ -114,6 +102,20 @@ set(LINK_LIB pthread dl)
 #     return()
 #endif()
 #set(_OCV_LIBRARIES opencv_imgcodecs)
+
+#ffmpeg
+set(FFMPEG_FOLDER ${AGENT_THIRD_PATRY_FOLDER}/ffmpeg)
+include_directories(${FFMPEG_FOLDER}/include)
+
+find_library(AVCODEC_LIB  avcodec  HINTS ${FFMPEG_FOLDER}/lib)
+find_library(AVFILTER_LIB avfilter HINTS ${FFMPEG_FOLDER}/lib)
+find_library(AVFORMAT_LIB avformat HINTS ${FFMPEG_FOLDER}/lib)
+find_library(AVUTIL_LIB   avutil   HINTS ${FFMPEG_FOLDER}/lib)
+find_library(SWSCALE_LIB  swscale  HINTS ${FFMPEG_FOLDER}/lib)
+
+set(FFMPEG_LINK_LIB ${AVCODEC_LIB} ${AVFILTER_LIB} ${AVFORMAT_LIB} ${AVUTIL_LIB} ${SWSCALE_LIB})
+message(INFO " FFMPEG LINK libs: " ${FFMPEG_LINK_LIB})
+set(LINK_LIB ${LINK_LIB} ${FFMPEG_LINK_LIB})
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}

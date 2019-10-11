@@ -61,7 +61,7 @@ bool VCAAClient::CreateVideoAnalyticsService(const std::string &model_name, cons
     }
 
     if (!res.has_status() || !checkResStatus(res.status())) {
-        LOG(ERROR) << "Response to create analytics service fail!"<< std::endl;
+        LOG(ERROR) << "Response to create analytics service fail!" << std::endl;
         return false;
     }
 
