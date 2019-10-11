@@ -5,6 +5,7 @@
 // local headers
 #include "agent_server.hpp"
 #include "agent_glog.hpp"
+#include "deep_player.hpp"
 
 namespace vgrpc = vcaa::grpcService;
 
@@ -20,6 +21,9 @@ Status VCAAServiceImpl::CreateVideoAnalyticsService(ServerContext *context, cons
     res_status->set_code(vgrpc::ResStatusCode::OK);
     // success, no message
     res_status->clear_message();
+
+    const char *params[] = { "aaa", "bbb" };
+    player_go(1, (char **)params);
 
     return Status::OK;
 }

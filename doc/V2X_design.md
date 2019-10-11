@@ -4,7 +4,7 @@
 | --------------- | ------ | ---------------------------------------------------------- |
 | Initial version | ww39.2 | draft                                                      |
 | v0.1            | ww39.4 | removed connection service. add working sequence/task list |
-|                 |        |                                                            |
+| v0.1.1          | ww41.5 | change service_id to string                                |
 |                 |        |                                                            |
 
 
@@ -19,13 +19,13 @@ VCAAVideoAnalyticsService {
 
 ​	`Status CreateVideoAnalyticsService(string model_name, AnalyticsConfigParameter param, AnalyticsServiceResponse *res)`
 
-​	`Status DestroyVideoAnalyticsService(int service_id)`
+​	`Status DestroyVideoAnalyticsService(string service_id)`
 
-​	`Status SetMediaStreamInfo(int service_id, string rtsp_addr)`
+​	`Status SetMediaStreamInfo(string service_id, string rtsp_addr)`
 
-​	`Status StartInference(int service_id, InferenceResponse *res)`
+​	`Status StartInference(string service_id, InferenceResponse *res)`
 
-​	`Status StopInference(int service_id)`
+​	`Status StopInference(string service_id)`
 
 }
 
@@ -43,7 +43,7 @@ AnalyticsConfigParameter {
 
 AnalyticsServiceResponse {
 
-​	`int service_id`
+​	`string service_id`
 
 }
 

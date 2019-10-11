@@ -4,61 +4,61 @@ package vcaa.grpcService;
 option cc_enable_arenas = true;
 
 service VCAAService {
-  rpc CreateVideoAnalyticsService(VideoAnalyticsRequest)
-      returns (VideoAnalyticsResponse) {}
+    rpc CreateVideoAnalyticsService(VideoAnalyticsRequest) returns (VideoAnalyticsResponse) {}
 
-  rpc SetMediaStreamInfo(MediaStreamSettingRequest)
-      returns (MediaStreamSettingResponse) {}
+    rpc SetMediaStreamInfo(MediaStreamSettingRequest) returns (MediaStreamSettingResponse) {}
+
+    rpc
 }
 
 // The request contains
 // * model_name: the name of model for analytics, e.g. YOLOv3
 // * config: configuration parameters for analytics
 message VideoAnalyticsRequest {
-  string model_name = 1;
-  AnalyticsConfigParam config = 2;
+    string model_name = 1;
+    AnalyticsConfigParam config = 2;
 }
 
 message AnalyticsConfigParam {
-  repeated ROI crop_rect = 1;
-  int32 num_infer_request = 2;
-  int32 batch_size = 3;
-  string device_name = 4;
-  string device_config = 5;
+    repeated ROI crop_rect = 1;
+    int32 num_infer_requests = 2;
+    int32 batch_size = 3;
+    string device_name = 4;
+    string device_config = 5;
 }
 
 message ROI {
-  int32 x = 1;
-  int32 y = 2;
-  int32 w = 3;
-  int32 h = 4;
+    int32 x = 1;
+    int32 y = 2;
+    int32 w = 3;
+    int32 h = 4;
 }
 
 message VideoAnalyticsResponse {
-  ResStatus status = 1;
+    ResStatus status = 1;
 
-  // service id
-  int32 service_id = 2;
+    // service id
+    string service_id = 2;
 }
 
 message MediaStreamSettingRequest {
-  int32 service_id = 1;
-  string rtsp_url = 2;
+    string service_id = 1;
+    string url = 2;
 }
 
 message MediaStreamSettingResponse {
-  ResStatus status = 1;
+    ResStatus status = 1;
 }
 
 enum ResStatusCode {
-  OK = 0;
-  ERROR = 1;
+    OK = 0;
+    ERROR = 1;
 }
 
 message ResStatus {
-  // response status code
-  ResStatusCode code = 1;
+    // response status code
+    ResStatusCode code = 1;
 
-  // response status message
-  string message = 2;
+    // response status message
+    string message = 2;
 }

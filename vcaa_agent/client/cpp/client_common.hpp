@@ -2,4 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-int player_go(int argc, char **argv);
+struct Rectangle {
+    int x;
+    int y;
+    int w;
+    int h;
+};
