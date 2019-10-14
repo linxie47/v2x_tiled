@@ -6,9 +6,13 @@ option cc_enable_arenas = true;
 service VCAAService {
     rpc CreateVideoAnalyticsService(VideoAnalyticsRequest) returns (VideoAnalyticsResponse) {}
 
+    rpc DestroyVideoAnalyticsService(DestroyAnalyticsServiceRequest) returns (DestroyServiceResponse) {}
+
     rpc SetMediaStreamInfo(MediaStreamSettingRequest) returns (MediaStreamSettingResponse) {}
 
-    rpc
+    rpc StartInference(InferStartRequest) returns (stream InferResponse) {}
+
+    rpc StopInference(InferStopRequest) returns (InferStopResponse) {}
 }
 
 // The request contains
@@ -17,6 +21,46 @@ service VCAAService {
 message VideoAnalyticsRequest {
     string model_name = 1;
     AnalyticsConfigParam config = 2;
+}
+
+message VideoAnalyticsResponse {
+    ResStatus status = 1;
+
+    // service id
+    string service_id = 2;
+}
+
+message DestroyAnalyticsServiceRequest {
+    string service_id = 1;
+}
+
+message DestroyServiceResponse {
+    ResStatus status = 1;
+}
+
+message MediaStreamSettingRequest {
+    string service_id = 1;
+    string url = 2;
+}
+
+message MediaStreamSettingResponse {
+    ResStatus status = 1;
+}
+
+message InferStartRequest {
+    string service_id = 1;
+}
+
+message InferResponse {
+    AnalyticsResult result = 1;
+}
+
+message InferStopRequest {
+    string service_id = 1;
+}
+
+message InferStopResponse {
+    ResStatus status = 1;
 }
 
 message AnalyticsConfigParam {
@@ -34,20 +78,56 @@ message ROI {
     int32 h = 4;
 }
 
-message VideoAnalyticsResponse {
-    ResStatus status = 1;
+message AnalyticsResult {
+    Detection detect_meta = 1;
 
-    // service id
-    string service_id = 2;
+    RawFrame raw_frame = 2;
 }
 
-message MediaStreamSettingRequest {
-    string service_id = 1;
-    string url = 2;
+// Detection result
+message Detection {
+    string label_id = 1;
+    string label = 2;
+    float confidence = 3;
+
+    message BoundingBox {
+        float xmin = 1;
+        float ymin = 2;
+        float xmax = 3;
+        float ymax = 4;
+    }
+    BoundingBox box = 4;
 }
 
-message MediaStreamSettingResponse {
-    ResStatus status = 1;
+message RawFrame {
+    int32 width = 1;
+    int32 height = 2;
+    string format = 3;
+    int64 timestamp = 4;
+    int32 size = 5;
+    DataBuffer buffer = 6;
+}
+
+// Byte buffer
+message BytesBuffer { bytes value = 1; }
+
+// Float buffer
+message FloatBuffer { repeated float value = 1 [ packed = true ]; }
+
+// Int 32 buffer
+message Int32Buffer { repeated int32 value = 1 [ packed = true ]; }
+
+// Int64 buffer
+message Int64Buffer { repeated int64 value = 1 [ packed = true ]; }
+
+// DataBuffer
+message DataBuffer {
+  oneof buffer {
+    BytesBuffer bBuf = 1;
+    FloatBuffer fBuf = 2;
+    Int32Buffer iBuf = 3;
+    Int64Buffer lBuf = 4;
+  }
 }
 
 enum ResStatusCode {

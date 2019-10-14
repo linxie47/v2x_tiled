@@ -22,10 +22,32 @@ Status VCAAServiceImpl::CreateVideoAnalyticsService(ServerContext *context, cons
     // success, no message
     res_status->clear_message();
 
-    const char *params[] = { "aaa", "bbb" };
+    const char *params[] = {"aaa", "bbb"};
     player_go(1, (char **)params);
 
     return Status::OK;
 }
+
+Status VCAAServiceImpl::DestroyVideoAnalyticsService(ServerContext *context,
+                                                     const vgrpc::DestroyAnalyticsServiceRequest *req,
+                                                     vgrpc::DestroyServiceResponse *res) {
+    return Status::OK;
+}
+
+Status VCAAServiceImpl::SetMediaStreamInfo(ServerContext *context, const vgrpc::MediaStreamSettingRequest *req,
+                                           vgrpc::MediaStreamSettingResponse *res) {
+    return Status::OK;
+}
+
+Status VCAAServiceImpl::StartInference(ServerContext *context, const vgrpc::InferStartRequest *req,
+                                       ServerWriter<vgrpc::InferResponse> *writer) {
+    return Status::OK;
+}
+
+Status VCAAServiceImpl::StopInference(ServerContext *context, const vgrpc::InferStopRequest *req,
+                                      vgrpc::InferStopResponse *res) {
+    return Status::OK;
+}
+
 } // namespace agent
 } // namespace vcaa

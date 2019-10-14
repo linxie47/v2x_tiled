@@ -36,6 +36,18 @@ class VCAAServiceImpl final : public vgrpc::VCAAService::Service {
   public:
     Status CreateVideoAnalyticsService(ServerContext *context, const vgrpc::VideoAnalyticsRequest *req,
                                        vgrpc::VideoAnalyticsResponse *res) override;
+
+    Status DestroyVideoAnalyticsService(ServerContext *context, const vgrpc::DestroyAnalyticsServiceRequest *req,
+                                        vgrpc::DestroyServiceResponse *res) override;
+
+    Status SetMediaStreamInfo(ServerContext *context, const vgrpc::MediaStreamSettingRequest *req,
+                              vgrpc::MediaStreamSettingResponse *res) override;
+
+    Status StartInference(ServerContext *context, const vgrpc::InferStartRequest *req,
+                          ServerWriter<vgrpc::InferResponse> *writer) override;
+
+    Status StopInference(ServerContext *context, const vgrpc::InferStopRequest *req,
+                         vgrpc::InferStopResponse *res) override;
 };
 
 } // end namespace agent
